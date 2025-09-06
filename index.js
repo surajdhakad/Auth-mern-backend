@@ -9,7 +9,6 @@ require("./Models/db"); // Database connection
 const AuthRouter = require("./Routes/AuthRouter");
 const ProductRouter = require("./Routes/ProductRouter");
 const CartRouter = require("./Routes/CartRouter");
-const AdminRouter = require("./Routes/AdminRouter");
 
 const PORT = process.env.PORT || 8088;
 
@@ -28,9 +27,8 @@ app.get("/ping", (req, res) => {
 app.use("/api/auth", AuthRouter);
 app.use("/api/products", ProductRouter);
 app.use("/api/cart", CartRouter);
-app.use("/api/admin", AdminRouter);
 
-// Handle API 404 Errors
+// Handle API 404 Errors (only for /api routes)
 app.use((req, res, next) => {
   if (req.path.startsWith("/api/")) {
     return res.status(404).json({ message: "Route not found" });
